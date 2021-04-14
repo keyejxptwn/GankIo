@@ -2,6 +2,7 @@ import 'package:banner_view/banner_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gank_io/http/api.dart';
+import 'package:gank_io/ui/big_girls.dart';
 import 'package:gank_io/ui/webview_page.dart';
 
 class GirlsPage extends StatefulWidget {
@@ -133,7 +134,8 @@ class _GirlsPageState extends State<GirlsPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => WebViewPage(item["title"], item['url']),
+              builder: (context) =>
+                  WebViewPage(title: item["title"], url: item['url']),
             ),
           );
         },
@@ -160,8 +162,8 @@ class _GirlsPageState extends State<GirlsPage> {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  WebViewPage(itemData["title"], itemData['url']),
+              builder: (context) => BigGirlPage(
+                  title: itemData["title"], imageUrl: itemData['url']),
             ),
           ),
           child: Card(

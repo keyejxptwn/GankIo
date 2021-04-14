@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gank_io/ui/android.dart';
 import 'package:gank_io/ui/girls.dart';
 
@@ -38,7 +39,6 @@ class MainPageDetail extends StatelessWidget {
                 Tab(text: "iOS"),
               ],
             ),
-            centerTitle: true,
           ),
           body: MainPageBody(),
           drawer: Drawer(
@@ -116,7 +116,7 @@ class LeftDrawer extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () => {print("退出")},
+          onTap: () => {pop()},
           child: ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text(
@@ -126,5 +126,9 @@ class LeftDrawer extends StatelessWidget {
         )
       ],
     );
+  }
+
+  static Future<void> pop() async {
+    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
   }
 }

@@ -87,7 +87,7 @@ class _AndroidPageState extends State<AndroidPage> {
         ? Container(
             padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
             child: InkWell(
-              onTap: _onItemClick(itemData),
+              onTap: () => _onItemClick(itemData),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(8.0))),
@@ -138,10 +138,10 @@ class _AndroidPageState extends State<AndroidPage> {
         : null;
   }
 
-  void _onItemClick(dynamic item) => Navigator.push(
+  void _onItemClick(var item) => Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => WebViewPage(item["title"], item['url']),
+        builder: (context) =>  WebViewPage(title: item["title"], url: item['url']),
       ));
 
   @override
