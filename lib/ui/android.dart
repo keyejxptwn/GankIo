@@ -3,12 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:gank_io/http/api.dart';
 import 'package:gank_io/ui/webview_page.dart';
 
-class AndroidPage extends StatefulWidget {
+class CategoryPage extends StatefulWidget {
+  String type;
+
+  CategoryPage(this.type);
+
   @override
-  _AndroidPageState createState() => _AndroidPageState();
+  _CategoryPageState createState() => _CategoryPageState(type);
 }
 
-class _AndroidPageState extends State<AndroidPage> {
+class _CategoryPageState extends State<CategoryPage> {
+  String type;
+
+  _CategoryPageState(this.type);
+
   bool _isLoading = true;
   int curPage = 1;
   List articles = [];
@@ -62,7 +70,7 @@ class _AndroidPageState extends State<AndroidPage> {
   }
 
   _getAndroidList([bool update = true]) async {
-    var data = await Api.getAndroidList(curPage);
+    var data = await Api.getCategoryList(curPage, type);
     if (data != null) {
       var map = data['data'];
       listTotalSize = data["total_counts"];
@@ -141,7 +149,8 @@ class _AndroidPageState extends State<AndroidPage> {
   void _onItemClick(var item) => Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>  WebViewPage(title: item["title"], url: item['url']),
+        builder: (context) =>
+            WebViewPage(title: item["title"], url: item['url']),
       ));
 
   @override

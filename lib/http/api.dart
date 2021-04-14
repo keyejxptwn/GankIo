@@ -19,18 +19,8 @@ class Api {
     return await HttpManager.getInstance().requestGet(URL_BANNER);
   }
 
-  static getAndroidList(int page) async {
+  static getCategoryList(int page, String category) async {
     return await HttpManager.getInstance().requestGet(
-        '$URL_CATEGORY_LIST/GanHuo/type/Android/page/$page/count/20');
-  }
-
-  static getFlutterList(int page) async {
-    return await HttpManager.getInstance().requestGet(
-        '$URL_CATEGORY_LIST/GanHuo/type/Flutter/page/$page/count/20');
-  }
-
-  static getIOSList(int page) async {
-    return await HttpManager.getInstance()
-        .requestGet('$URL_CATEGORY_LIST/GanHuo/type/iOS/page/$page/count/20');
+        '$URL_CATEGORY_LIST/GanHuo/type/$category/page/$page/count/20');
   }
 }

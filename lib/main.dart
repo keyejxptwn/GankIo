@@ -59,9 +59,9 @@ class _MainPageBodyState extends State<MainPageBody> {
     return TabBarView(
       children: <Widget>[
         GirlsPage(),
-        AndroidPage(),
-        Icon(Icons.directions_bike),
-        Icon(Icons.directions_bike),
+        CategoryPage("Android"),
+        CategoryPage("Flutter"),
+        CategoryPage("iOS"),
       ],
     );
   }
