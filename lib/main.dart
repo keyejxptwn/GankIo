@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gank_io/ui/about.dart';
 import 'package:gank_io/ui/category.dart';
 import 'package:gank_io/ui/girls.dart';
 
@@ -100,7 +101,10 @@ class LeftDrawer extends StatelessWidget {
               ),
             )),
         InkWell(
-          onTap: () => {print("收藏")},
+          onTap: () => {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AboutPage()))
+          },
           child: ListTile(
               leading: Icon(Icons.favorite),
               title: Text(
