@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gank_io/http/api.dart';
+import 'package:gank_io/ui/webview_page.dart';
 
 class AndroidPage extends StatefulWidget {
   @override
@@ -26,8 +27,6 @@ class _AndroidPageState extends State<AndroidPage> {
     });
     _pullToRefresh();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +87,7 @@ class _AndroidPageState extends State<AndroidPage> {
         ? Container(
             padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
             child: InkWell(
-              onTap: _onItemClick,
+              onTap: _onItemClick(itemData),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(8.0))),
@@ -139,11 +138,14 @@ class _AndroidPageState extends State<AndroidPage> {
         : null;
   }
 
-  void _onItemClick() {}
+  void _onItemClick(dynamic item) => Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WebViewPage(item["title"], item['url']),
+      ));
 
   @override
   void dispose() {
-    //为了避免内存泄露，需要调用_controller.dispose
     _controller.dispose();
     super.dispose();
   }

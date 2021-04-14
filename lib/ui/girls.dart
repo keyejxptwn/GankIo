@@ -2,6 +2,7 @@ import 'package:banner_view/banner_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gank_io/http/api.dart';
+import 'package:gank_io/ui/webview_page.dart';
 
 class GirlsPage extends StatefulWidget {
   @override
@@ -129,7 +130,12 @@ class _GirlsPageState extends State<GirlsPage> {
         child: Image.network(item['image'], fit: BoxFit.cover), //fit 图片充满容器
         ///点击事件
         onTap: () {
-          ///跳转页面
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => WebViewPage(item["title"], item['url']),
+            ),
+          );
         },
       );
     }).toList();
@@ -149,60 +155,69 @@ class _GirlsPageState extends State<GirlsPage> {
 
   Widget _itemView(dynamic itemData) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        elevation: 4.0,
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                itemData["url"],
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-              ),
+        padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        child: InkWell(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  WebViewPage(itemData["title"], itemData['url']),
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 200,
-                color: Color(0xB3FFFFFF),
-                padding: EdgeInsets.zero,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+          child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            elevation: 4.0,
+            child: Stack(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 5.0),
-                  child: Text(
-                    itemData['title'],
-                    style: const TextStyle(fontSize: 16.0, color: Colors.black),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    itemData["url"],
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
-                  child: Text(itemData['desc'],
-                      style:
-                          const TextStyle(fontSize: 18.0, color: Colors.blue)),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    itemData['publishedAt'],
-                    textAlign: TextAlign.right,
-                    style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    color: Color(0xB3FFFFFF),
+                    padding: EdgeInsets.zero,
                   ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 5.0),
+                      child: Text(
+                        itemData['title'],
+                        style: const TextStyle(
+                            fontSize: 16.0, color: Colors.black),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
+                      child: Text(itemData['desc'],
+                          style: const TextStyle(
+                              fontSize: 18.0, color: Colors.blue)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        itemData['publishedAt'],
+                        textAlign: TextAlign.right,
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
+                    )
+                  ],
                 )
               ],
-            )
-          ],
-        ),
-      ),
-    );
+            ),
+          ),
+        ));
   }
 }
