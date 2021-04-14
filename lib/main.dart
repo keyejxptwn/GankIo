@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gank_io/ui/android.dart';
+import 'package:gank_io/ui/category.dart';
 import 'package:gank_io/ui/girls.dart';
 
 void main() => runApp(MainPage());
