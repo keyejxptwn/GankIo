@@ -98,7 +98,7 @@ class _CategoryPageState extends State<CategoryPage> {
               onTap: () => _onItemClick(itemData),
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+                    borderRadius: BorderRadius.all(const Radius.circular(8.0))),
                 elevation: 4.0,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,8 +108,8 @@ class _CategoryPageState extends State<CategoryPage> {
                       height: 120,
                       child: ClipRRect(
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8.0),
-                              bottomLeft: Radius.circular(8.0)),
+                              topLeft: const Radius.circular(8.0),
+                              bottomLeft: const Radius.circular(8.0)),
                           child: imageList.isNotEmpty
                               ? imageList[0].toString().contains("http")
                                   ? Image.network(
