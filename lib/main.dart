@@ -7,12 +7,31 @@ import 'package:gank_io/ui/girls.dart';
 
 void main() => runApp(MainPage());
 
+Future<void> pop() async {
+  await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+}
+
 class MainPage extends StatelessWidget {
+  int lastCurrent = DateTime.now().second;
+  int current = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainPageDetail(),
-    );
+        home: WillPopScope(
+      onWillPop: () {
+        print("点击了返回键");
+        current = DateTime.now().second;
+        int interval = current - lastCurrent;
+        if (interval.abs() <= 2) {
+          return new Future.value(true);
+        } else {
+          lastCurrent = current;
+          return new Future.value(false);
+        }
+      },
+      child: MainPageDetail(),
+    ));
   }
 }
 
@@ -130,9 +149,5 @@ class LeftDrawer extends StatelessWidget {
         )
       ],
     );
-  }
-
-  static Future<void> pop() async {
-    await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
   }
 }
