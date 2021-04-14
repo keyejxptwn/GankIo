@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gank_io/ui/meizi.dart';
+import 'package:gank_io/ui/girls.dart';
 
 void main() => runApp(MainPage());
 
@@ -21,7 +21,7 @@ class MainPageDetail extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Gank.IO",
+              "Gank.io",
               style: const TextStyle(color: Colors.white),
             ),
             bottom: TabBar(
@@ -57,7 +57,7 @@ class _MainPageBodyState extends State<MainPageBody> {
   Widget build(BuildContext context) {
     return TabBarView(
       children: <Widget>[
-        MeiziPage(),
+        GirlsPage(),
         Icon(Icons.directions_transit),
         Icon(Icons.directions_bike),
         Icon(Icons.directions_bike),

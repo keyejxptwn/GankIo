@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gank_io/http/api.dart';
 
-class MeiziPage extends StatefulWidget {
+class GirlsPage extends StatefulWidget {
   @override
-  _MeiziPageState createState() => _MeiziPageState();
+  _GirlsPageState createState() => _GirlsPageState();
 }
 
-class _MeiziPageState extends State<MeiziPage> {
+class _GirlsPageState extends State<GirlsPage> {
   ///滑动控制器
   ScrollController _controller = new ScrollController();
 
@@ -34,7 +34,7 @@ class _MeiziPageState extends State<MeiziPage> {
       ///当前滑动位置到达底部，同时还有更多数据
       if (maxScroll == pixels && articles.length < listTotalSize) {
         ///加载更多
-        _getMeiziList();
+        _getGirlsList();
       }
     });
     _pullToRefresh();
@@ -74,22 +74,20 @@ class _MeiziPageState extends State<MeiziPage> {
   ///下拉刷新
   Future<void> _pullToRefresh() async {
     curPage = 1;
-    Iterable<Future> futures = [_getMeiziList(), _getBanner()];
+    Iterable<Future> futures = [_getGirlsList(), _getBanner()];
     await Future.wait(futures);
     _isLoading = false;
     setState(() {});
     return null;
   }
 
-  _getMeiziList([bool update = true]) async {
-    var data = await Api.getMeiziList(curPage);
-    print(data.toString());
+  _getGirlsList([bool update = true]) async {
+    var data = await Api.getGirlsList(curPage);
     if (data != null) {
       var map = data['data'];
       print(map.runtimeType.toString());
       listTotalSize = data["total_counts"];
-
-      if (curPage == 0) {
+      if (curPage == 1) {
         articles.clear();
       }
       curPage++;
@@ -104,9 +102,6 @@ class _MeiziPageState extends State<MeiziPage> {
 
   _getBanner([bool update = true]) async {
     var data = await Api.getBanner();
-    debugPrint(data.runtimeType.toString());
-
-    ///print(data.toString());
     if (data != null) {
       var dateJson = data["data"];
       bannerList.clear();
@@ -120,7 +115,7 @@ class _MeiziPageState extends State<MeiziPage> {
   Widget _buildItem(int i) {
     if (i == 0) {
       return new Container(
-        height: 180.0,
+        height: 200.0,
         child: _bannerView(),
       );
     }
@@ -139,9 +134,15 @@ class _MeiziPageState extends State<MeiziPage> {
       );
     }).toList();
     return list.isNotEmpty
-        ? BannerView(
-            list,
-            intervalDuration: const Duration(seconds: 3),
+        ? Padding(
+            padding: EdgeInsets.all(10),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              child: BannerView(
+                list,
+                intervalDuration: const Duration(seconds: 4),
+              ),
+            ),
           )
         : null;
   }
