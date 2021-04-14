@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gank_io/ui/android.dart';
 import 'package:gank_io/ui/girls.dart';
 
 void main() => runApp(MainPage());
@@ -58,7 +59,7 @@ class _MainPageBodyState extends State<MainPageBody> {
     return TabBarView(
       children: <Widget>[
         GirlsPage(),
-        Icon(Icons.directions_transit),
+        AndroidPage(),
         Icon(Icons.directions_bike),
         Icon(Icons.directions_bike),
       ],

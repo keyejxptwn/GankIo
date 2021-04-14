@@ -59,7 +59,7 @@ class _GirlsPageState extends State<GirlsPage> {
         ///内容
         Offstage(
           offstage: _isLoading,
-          child: new RefreshIndicator(
+          child: RefreshIndicator(
               child: ListView.builder(
                 itemCount: articles.length + 1,
                 itemBuilder: (context, i) => _buildItem(i),

@@ -30,6 +30,7 @@ class HttpManager {
     try {
       Options option = new Options(method: method);
       Response response = await _dio.request(url, data: data, options: option);
+      debugPrint("response:${response.toString()}");
       return response.data;
     } catch (e) {
       debugPrint(e);
@@ -42,6 +43,7 @@ class HttpManager {
     try {
       Options option = new Options(method: method);
       Response response = await _dio.request(url, data: data, options: option);
+      debugPrint("response:${response.toString()}");
       return response.data;
     } catch (e) {
       debugPrint(e);
